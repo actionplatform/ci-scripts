@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
-# Refuse pushing a protected branch unless every new commit is a release commit.
+# Refuse pushing a protected branch unless every new commit is a release commit. Tags pass.
 set -euo pipefail
 . "$(dirname "$0")/gitflow.sh"
 while read -r local_ref local_sha remote_ref remote_sha; do
   [ -z "$local_ref" ] && continue
+  case "$remote_ref" in refs/heads/*) ;; *) continue ;; esac
   branch="${remote_ref#refs/heads/}"
   gitflow_branch "$branch"
   printf '%s' "$branch" | grep -Eq "^(${AP_PROTECTED})$" || continue
