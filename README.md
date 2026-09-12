@@ -10,7 +10,7 @@ The one implementation of Action Platform CI steps. Bash, no dependencies beyond
 | `conventional-commit.sh` | Conventional Commits 1.0.0 on `AP_BASE..HEAD` | `AP_BASE`, `AP_TYPES` |
 | `gitflow.sh` | rules: `branch`, `commit-msg`, `target`, `protect` — also sourced by the git hooks | `AP_KINDS`, `AP_TYPES`, `AP_PROTECTED` |
 | `gitflow-pr.sh` | CI: head branch name + merge target | `AP_HEAD`, `AP_BASE`, `AP_HAS_DEVELOP`, `AP_DEFAULT_BRANCH` |
-| `hooks/` | `pre-commit`, `commit-msg`, `pre-push` — installed in every project as `.githooks/` | — |
+| `hooks/` | `pre-commit`, `commit-msg`, `pre-push` — bundled in the `action-platform` CLI, installed into `.git/hooks` by `action-platform install` | — |
 | `lib.sh` | `ap_language`, `ap_type` — read `platform.toml` | — |
 
 ```bash
