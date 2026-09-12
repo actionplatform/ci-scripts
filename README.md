@@ -8,6 +8,9 @@ The one implementation of Action Platform CI steps. Bash, no dependencies beyond
 | `check.sh` | lint + format + tests (`docs` type: `mkdocs build --strict`) | `AP_LANGUAGE`, `AP_TYPE`, `AP_CHECK` (override) |
 | `release.sh` | `LAST_VERSION` + version constants from a tag, commit back | `AP_TAG`, `AP_FILES`, `AP_BRANCH`, `AP_GIT_USER`, `AP_GIT_EMAIL` |
 | `conventional-commit.sh` | Conventional Commits 1.0.0 on `AP_BASE..HEAD` | `AP_BASE`, `AP_TYPES` |
+| `gitflow.sh` | rules: `branch`, `commit-msg`, `target`, `protect` — also sourced by the git hooks | `AP_KINDS`, `AP_TYPES`, `AP_PROTECTED` |
+| `gitflow-pr.sh` | CI: head branch name + merge target | `AP_HEAD`, `AP_BASE`, `AP_HAS_DEVELOP`, `AP_DEFAULT_BRANCH` |
+| `hooks/` | `pre-commit`, `commit-msg`, `pre-push` — installed in every project as `.githooks/` | — |
 | `lib.sh` | `ap_language`, `ap_type` — read `platform.toml` | — |
 
 ```bash
