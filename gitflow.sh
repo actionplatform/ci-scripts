@@ -38,7 +38,7 @@ gitflow_current_branch() {
 gitflow_protect() {
   local branch="$1" msg="${2:-}"
   printf '%s' "$branch" | grep -Eq "^(${AP_PROTECTED})$" || return 0
-  printf '%s' "$msg" | grep -Eq '^(chore\(release\): |chore: bootstrap)' && return 0
+  printf '%s' "$msg" | grep -Eq '^(chore\(release\): |chore\(platform\): |chore: bootstrap)' && return 0
   git rev-parse -q --verify HEAD >/dev/null 2>&1 || return 0
   echo "::error::direct commits on '$branch' are not allowed — start a branch: action-platform branch feature <code>" >&2
   return 1
