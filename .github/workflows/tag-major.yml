@@ -16,3 +16,7 @@ jobs:
           major="${GITHUB_REF_NAME%%.*}"
           git tag -f "$major"
           git push -f origin "$major"
+          if [ "$major" = "v0" ]; then
+            git tag -f v1
+            git push -f origin v1
+          fi
