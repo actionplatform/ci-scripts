@@ -6,7 +6,6 @@ ap_language() {
   if [ -z "$lang" ] && [ -f platform.toml ]; then
     lang=$(sed -n 's/^language = "\(.*\)"/\1/p' platform.toml | head -1)
   fi
-  [ -n "$lang" ] || { echo "error: language not given (AP_LANGUAGE) and platform.toml has none" >&2; exit 1; }
   printf '%s' "$lang"
 }
 
