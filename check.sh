@@ -6,6 +6,11 @@ set -euo pipefail
 lang=$(ap_language)
 type_=$(ap_type)
 
+if [ -z "${AP_CHECK:-}" ] && [ -z "$lang" ] && [ "$type_" != "docs" ]; then
+  echo "no language in platform.toml: nothing to check"
+  exit 0
+fi
+
 if [ -n "${AP_CHECK:-}" ]; then
   cmds=("$AP_CHECK")
 elif [ "$type_" = "docs" ]; then

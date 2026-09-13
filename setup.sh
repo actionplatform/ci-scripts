@@ -6,8 +6,9 @@ set -euo pipefail
 
 lang=$(ap_language)
 install="${AP_INSTALL:-true}"
-echo "language=$lang install=$install"
+echo "language=${lang:-none} install=$install"
 [ "$install" = "true" ] || exit 0
+[ -n "$lang" ] || { echo "no language in platform.toml: nothing to install"; exit 0; }
 
 case "$lang" in
   python)
