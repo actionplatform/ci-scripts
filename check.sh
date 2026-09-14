@@ -23,6 +23,7 @@ case "$lang" in
   php)    cmds=('composer lint' 'composer analyse' 'composer test') ;;
   java)   cmds=('mvn -B verify') ;;
   rust)   cmds=('cargo fmt --check' 'cargo clippy -- -D warnings' 'cargo test') ;;
+  ruby)   cmds=('bundle exec rubocop' 'bundle exec rspec') ;;
   *)      echo "error: no checks for language $lang" >&2; exit 1 ;;
 esac
 fi

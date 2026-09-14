@@ -20,5 +20,6 @@ case "$lang" in
   php)  composer install --no-interaction --prefer-dist ;;
   java) mvn -B -q dependency:resolve ;;
   rust) cargo fetch ;;
+  ruby) bundle install --jobs 4 ;;
   *)    echo "error: unknown language $lang" >&2; exit 1 ;;
 esac
