@@ -50,8 +50,13 @@ case "$lang" in
   java)
     run mvn -B -q -DskipTests deploy
     ;;
-  go|php)
-    echo "$lang: the tag is the release; $registry reads it from the repository"
+  go)
+    module=$(go list -m)
+    echo "go: the tag is the release; asking the module proxy for $module@v$version"
+    curl -fsS "https://proxy.golang.org/${module}/@v/v${version}.info" || echo "the proxy will pick the tag up on first request"
+    ;;
+  php)
+    echo "php: the tag is the release; Packagist reads it from the repository"
     ;;
   *)
     echo "error: no publish step for language ${lang:-none}" >&2
