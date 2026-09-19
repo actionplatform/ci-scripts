@@ -17,7 +17,11 @@ elif [ "$type_" = "docs" ]; then
   cmds=('poetry run mkdocs build --strict')
 else
 case "$lang" in
-  python) cmds=('poetry run ruff check .' 'poetry run ruff format --check .' 'poetry run pytest') ;;
+  python)
+    cmds=('poetry run ruff check .' 'poetry run ruff format --check .')
+    [ -f .code_quality/mypy.ini ] && cmds+=('poetry run mypy --config-file .code_quality/mypy.ini .')
+    cmds+=('poetry run pytest')
+    ;;
   go)     cmds=('go vet ./...' 'test -z "$(gofmt -l .)"' 'go test ./...') ;;
   node)   cmds=('npm run lint' 'npm test') ;;
   php)    cmds=('composer lint' 'composer analyse' 'composer test') ;;
