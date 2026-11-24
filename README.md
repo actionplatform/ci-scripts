@@ -5,7 +5,7 @@ The one implementation of Action Platform CI steps. Bash, no dependencies beyond
 | Script | Does | Env |
 |--------|------|-----|
 | `setup.sh` | install dependencies for the language | `AP_LANGUAGE` (default: `platform.toml`), `AP_INSTALL` |
-| `check.sh` | lint + format + tests (`docs` type: `mkdocs build --strict`; python adds mypy when `.code_quality/mypy.ini` exists) | `AP_LANGUAGE`, `AP_TYPE`, `AP_CHECK` (override) |
+| `check.sh` | lint + format + tests (`docs` type: `mkdocs build --strict` when `mkdocs.yml` exists, nothing otherwise; python adds mypy when `.code_quality/mypy.ini` exists) | `AP_LANGUAGE`, `AP_TYPE`, `AP_CHECK` (override) |
 | `publish.sh` | build + publish a library for the registry the platform named (python: `poetry publish` with `PYPI_TOKEN`, else `dist/` for trusted publishing; node: `npm publish --provenance`, dist-tag from the registry; rust, ruby, java; go/php: nothing to upload) | `AP_VERSION`, `AP_REGISTRY`, `AP_LANGUAGE` |
 | `release.sh` | `LAST_VERSION` + version constants from a tag, commit back | `AP_TAG`, `AP_FILES`, `AP_BRANCH`, `AP_GIT_USER`, `AP_GIT_EMAIL` |
 | `conventional-commit.sh` | Conventional Commits 1.0.0 on `AP_BASE..HEAD` | `AP_BASE`, `AP_TYPES` |
