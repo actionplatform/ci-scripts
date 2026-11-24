@@ -6,18 +6,17 @@ set -euo pipefail
 lang=$(ap_language)
 type_=$(ap_type)
 
-if [ -z "${AP_CHECK:-}" ] && [ -z "$lang" ] && [ "$type_" != "docs" ]; then
-  echo "no language in platform.toml: nothing to check"
+mkdocs=false
+[ "$type_" = "docs" ] && [ -f mkdocs.yml ] && mkdocs=true
+
+if [ -z "${AP_CHECK:-}" ] && [ -z "$lang" ] && [ "$mkdocs" = false ]; then
+  echo "no language in platform.toml and no mkdocs.yml: nothing to check"
   exit 0
 fi
 
 if [ -n "${AP_CHECK:-}" ]; then
   cmds=("$AP_CHECK")
-elif [ "$type_" = "docs" ]; then
-  if [ ! -f mkdocs.yml ]; then
-    echo "docs project without mkdocs.yml: nothing to build"
-    exit 0
-  fi
+elif [ "$mkdocs" = true ]; then
   cmds=('poetry run mkdocs build --strict')
 else
 case "$lang" in
