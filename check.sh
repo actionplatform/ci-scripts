@@ -14,6 +14,10 @@ fi
 if [ -n "${AP_CHECK:-}" ]; then
   cmds=("$AP_CHECK")
 elif [ "$type_" = "docs" ]; then
+  if [ ! -f mkdocs.yml ]; then
+    echo "docs project without mkdocs.yml: nothing to build"
+    exit 0
+  fi
   cmds=('poetry run mkdocs build --strict')
 else
 case "$lang" in
